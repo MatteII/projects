@@ -1,7 +1,5 @@
-// MAIN.JS
-
 // LIBRARIES
-const prompt = require("prompt-sync")();
+const prompt = require( "prompt-sync" )();
 
 // GLOBAL VARS
 const ROWS = 3;
@@ -21,12 +19,12 @@ const SYMBOL_VALUES = {
 
 // FUNCTIONS
 const deposit = () => {
-        while (true) {
-                const depositAmount = prompt("Inserisci l'importo del deposito: ");
-                const numberDepositAmount = parseFloat(depositAmount);
+        while ( true ) {
+                const depositAmount = prompt( "Inserisci l'importo del deposito: " );
+                const numberDepositAmount = parseFloat( depositAmount );
 
-                if ( isNaN(numberDepositAmount) ||  numberDepositAmount <= 0 ) {
-                        console.log("Importo del deposito non valido, riprova.");
+                if ( isNaN( numberDepositAmount ) ||  numberDepositAmount <= 0 ) {
+                        console.log( "Importo del deposito non valido, riprova." );
                 } else {
                         return numberDepositAmount;
                 }
@@ -34,25 +32,25 @@ const deposit = () => {
 };
 
 const getNumberOfLines = () => {
-        while (true) {
-                const lines = prompt("Inserisci il numero di linee su cui scommettere (1-3): ");
-                const numberOfLines = parseFloat(lines);
+        while ( true ) {
+                const lines = prompt( "Inserisci il numero di linee su cui scommettere (1-3): " );
+                const numberOfLines = parseFloat( lines );
 
-                if ( isNaN(numberOfLines) || numberOfLines <= 0 || numberOfLines > 3 ) {
-                        console.log("Numero di linee non valido, riprova.");
+                if ( isNaN( numberOfLines ) || numberOfLines <= 0 || numberOfLines > 3 ) {
+                        console.log( "Numero di linee non valido, riprova." );
                 } else {
                         return numberOfLines;
                 }
         }
 };
 
-const getBet = (balance, lines) => {
-        while (true) {
-                const bet = prompt("Inserisci il totale scommessa per linea: ");
+const getBet = ( balance, lines ) => {
+        while ( true ) {
+                const bet = prompt( "Inserisci il totale scommessa per linea: " );
                 const numberBet = parseFloat(bet);
 
-                if ( isNaN(numberBet) || numberBet <= 0 || numberBet > balance / lines ) {
-                        console.log("Importo scommessa invalido, riprova.");
+                if ( isNaN( numberBet ) || numberBet <= 0 || numberBet > balance / lines ) {
+                        console.log( "Importo scommessa invalido, riprova." );
                 } else {
                         return numberBet;
                 }
@@ -61,9 +59,9 @@ const getBet = (balance, lines) => {
 
 const spin = () => {
         const symbols = [];
-        for ( const [ symbol, count ] of Object.entries(SYMBOLS_COUNT) ) {
-                for ( let i = 0; i < count; i++  ) {
-                        symbols.push(symbol);
+        for ( const [ symbol, count ] of Object.entries( SYMBOLS_COUNT ) ) {
+                for ( let i = 0; i < count; i++ ) {
+                        symbols.push( symbol );
                 }
         }
 
@@ -84,7 +82,7 @@ const spin = () => {
         return reels;
 };
 
-const transpose = (reels) => {
+const transpose = ( reels ) => {
         const rows = [];
 
         for ( let i = 0; i < ROWS; i++ ) {
@@ -110,12 +108,54 @@ const printRows = ( rows ) => {
         }
 };
 
-// MIN => 55:47 / 1:10:25
+const getWinnings = ( rows, bet, lines ) => {
+        let winnings = 0;
 
-// ---------------
-let balance = deposit();
-const numberOfLines = getNumberOfLines();
-const bet = getBet(balance, numberOfLines);
-const reels = spin();
-const rows = transpose(reels);
-printRows(rows);
+        for ( let row = 0; row < lines; row++ ) {
+                const symbols = rows[ row ];
+                let allSame = true;
+
+                for ( const symbol of symbols ) {
+                        if ( symbol != symbols[ 0 ] ) {
+                                allSame = false;
+                                break;
+                        }
+
+                }
+
+                if ( allSame ) {
+                        winnings += bet * SYMBOL_VALUES[ symbols[ 0 ] ];
+                }
+        }
+
+        return winnings;
+};
+
+const game = () => {
+        let balance = deposit();
+
+        while ( true ) {
+                console.log( "Il tuo bilancio è di: " + balance + " Monete." );
+                const numberOfLines = getNumberOfLines();
+                const bet = getBet( balance, numberOfLines );
+                balance -= bet * numberOfLines;
+                const reels = spin();
+                const rows = transpose( reels );
+                printRows( rows );
+                const winnings = getWinnings( rows, bet, numberOfLines );
+                balance += winnings;
+                console.log( "Hai vinto " + winnings.toString() + " Monete!" );  
+
+                if ( balance <= 0 ) {
+                        console.log( "Non hai più Monete per scommettere." );
+                        break;
+                } 
+
+                const playAgain = prompt( "Vuoi giocare ancora? ( y/n )? " )
+
+                if ( playAgain != "y" ) break;
+        }
+};
+
+// GAME
+game();
