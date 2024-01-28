@@ -1,5 +1,5 @@
-// import { getWeather } from "/weather"
-// import { ICON_MAP } from "/iconMap"
+import { getWeather } from "https://matteii.github.io/projects/JS/weather-app/weather.js"
+import { ICON_MAP } from "https://matteii.github.io/projects/JS/weather-app/iconMap.js"
 
 // ====================[ GET LOCATION, WEATHER ]======================= //
 
