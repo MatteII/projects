@@ -1,5 +1,5 @@
-import { getWeather } from "./weather"
-import { ICON_MAP } from "./iconMap"
+import { getWeather } from "/weather"
+import { ICON_MAP } from "/iconMap"
 
 // ====================[ GET LOCATION, WEATHER ]======================= //
 
