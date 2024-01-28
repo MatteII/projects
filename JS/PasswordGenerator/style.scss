@@ -1,0 +1,198 @@
+html,
+body,
+*{
+        box-sizing: border-box;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #1e1e1e;
+  font-family: 'Rubik', sans-serif;
+}
+.container{
+  width: 450px;
+  background: #0f0f0f;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.container h2{
+  font-weight: 600;
+  color: #ececec;
+  font-size: 1.31rem;
+  padding: 0.4rem 1.75rem 1.2rem;
+  border-bottom: 1px solid #333;
+}
+.wrapper{
+  margin: 1.25rem 1.75rem;
+}
+.wrapper .input-box{
+  position: relative;
+}
+.input-box input{
+  width: 100%;
+  height: 53px;
+  color: #ececec;
+  background: none;
+  font-size: 1.06rem;
+  font-weight: 500;
+  border-radius: 4px;
+  letter-spacing: 1.4px;
+  border: 1px solid #333;
+  padding: 0 2.85rem 0 1rem;
+  margin: 0;
+}
+.input-box span:not(.tooltiptext){
+  position: absolute;
+  right: 13px;
+  top: 15px;
+  cursor: pointer;
+  color: #ececec;
+}
+.input-box span:not(.tooltiptext):hover{
+  color: #39f !important;
+}
+
+ /* Tooltip container */
+.tooltip {
+position: relative;
+display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: 'Rubik', sans-serif;
+  position: absolute;
+  z-index: 1;
+  bottom: 36px;
+  left: 50%;
+  margin-left: -70px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  height: 30px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 3px 5px 5px rgba(0,0,0,0.2);
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+content: "";
+position: absolute;
+top: 100%;
+left: 50%;
+margin-left: -5px;
+border-width: 5px;
+border-style: solid;
+border-color: #333 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+visibility: visible;
+opacity: 1;
+} 
+.wrapper .title {
+        color: #ececec;
+        text-transform: uppercase;
+        margin-bottom: 4px;;
+}
+
+.wrapper .pass-indicator{
+  width: 100%;
+  height: 4px;
+  position: relative;
+  background: #666;
+  margin-top: 0.75rem;
+  border-radius: 25px;
+}
+.pass-indicator::before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 50%;
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}
+.pass-indicator#weak::before{
+  width: 20%;
+  background: rgb(226, 30, 30);
+}
+.pass-indicator#medium::before{
+  width: 50%;
+  background: rgb(214, 214, 6);
+}
+.pass-indicator#strong::before{
+  width: 100%;
+  background: rgb(19, 172, 19);
+}
+.wrapper .pass-length{
+  margin: 1.56rem 0 1.25rem;
+}
+.pass-length .details{
+  display: flex;
+  justify-content: space-between;
+}
+.pass-length .details span {
+        color: #ececec;
+        font-weight: 600;
+}
+.pass-length input{
+  width: 100%;
+  height: 5px;
+}
+.pass-settings .options{
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding: 0;
+}
+.pass-settings .options .option{
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: calc(100% / 2);
+}
+.options .option:first-child{
+  pointer-events: none;
+}
+.options .option:first-child input{
+  opacity: 0.7;
+}
+.options .option input{
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
+.options .option label{
+  cursor: pointer;
+  color: #868686;
+  padding-left: 0.63rem;
+}
+.wrapper .generate-btn{
+  width: 100%;
+  color: #ececec;
+  border: 2px solid #000;
+  outline: none;
+  cursor: pointer;
+  background: #070707;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.94rem 0;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: 'Rubik', sans-serif;
+  margin: 0.94rem 0 1.3rem;
+  letter-spacing: 1px;
+}
